@@ -1,4 +1,6 @@
-﻿#region usings
+﻿
+#region usings
+using SlimDX.Direct3D9;
 using System;
 using System.ComponentModel.Composition;
 using System.Drawing;
@@ -6,33 +8,41 @@ using VVVV.Core.Logging;
 using VVVV.PluginInterfaces.V1;
 using VVVV.PluginInterfaces.V2;
 using VVVV.PluginInterfaces.V2.EX9;
-using VVVV.Utils.VMath;
+using VVVV.Utils.SlimDX;
 using ZXing;
 using ZXing.Common;
 using ZXing.Rendering;
 #endregion usings
 
-namespace VVVV.Spreads
+//here you can change the vertex type
+
+namespace VVVV.Nodes
 {
-    public enum TCoordinateSystem { VVVV, OpenCV };
-
     #region PluginInfo
-    [PluginInfo(Name = "Barcode1d", Category = "Barcode", Help = "Creates a barcode image based on the specified format and data.", Author = "ravazquez" ,AutoEvaluate = true)]
+    [PluginInfo(Name = "Barcode1d",
+                Category = "EX9.Texture",
+                Version = "",
+                Help = "Basic template which creates a texture",
+                Tags = "c#")]
     #endregion PluginInfo
-
-    public class Info
+    public class Barcode1d : IPluginEvaluate, IPartImportsSatisfiedNotification
     {
-        public int Slice;
-        public int Width;
-        public int Height;
-        public double WaveCount;
-    }
+        //little helper class used to store information for each
+        //texture resource
+        public class Info
+        {
+            public int Slice;
+            public int Width;
+            public int Height;
+            public string Data;
+            public BarcodeFormat Format;
+        }
 
-    public class Barcode1d : IPluginEvaluate, IDisposable
-    {
-        #region fields & pins
-        [Input("Resolution")]
-        ISpread<Vector2D> FPinInSensorSize;
+        [Input("Data", DefaultValue = 1)]
+        public ISpread<string> FDataIn;
+
+        [Input("Format", DefaultValue = 1)]
+        public ISpread<BarcodeFormat> FFormatIn;
 
         [Input("Width", DefaultValue = 64, MinValue = 1)]
         public ISpread<int> FWidthIn;
@@ -40,77 +50,11 @@ namespace VVVV.Spreads
         [Input("Height", DefaultValue = 64, MinValue = 1)]
         public ISpread<int> FHeightIn;
 
-        [Input("Enabled")]
-        ISpread<bool> FPinEnabled;
-
         [Output("Texture Out")]
         public ISpread<TextureResource<Info>> FTextureOut;
 
-        [Output("View per board")]
-        ISpread<Matrix4x4> FPinOutView;
-
-        [Output("Projection")]
-        ISpread<Matrix4x4> FPinOutProjection;
-
-        [Output("Reprojection Error")]
-        ISpread<Double> FPinOutError;
-
-        [Output("Success")]
-        ISpread<bool> FPinOutSuccess;
-
-        [Output("Status")]
-        ISpread<string> FStatus;
-
         [Import]
-        ILogger FLogger;
-
-        #endregion fields & pins
-
-        [ImportingConstructor]
-        public Barcode1d(IPluginHost host)
-        {
-
-        }
-
-        public void Dispose()
-        {
-
-        }
-
-        private EncodingOptions EncodingOptions { get; set; }
-        private Type Renderer { get; set; }
-
-        //called when data for any output pin is requested
-        /*public void Evaluate(int SpreadMax)
-        {
-            if (FPinEnabled[0])
-            {
-                try {
-                    FPinOutSuccess[0] = true;
-                    FStatus[0] = "OK";
-
-                    var width = 0;
-                    var height = 0;
-                    var data = "12312312";
-                    var writer = new BarcodeWriter
-                    {
-                        Format = BarcodeFormat.EAN_13,
-                        Options = EncodingOptions ?? new EncodingOptions
-                        {
-                            Height = height,
-                            Width = width
-                        },
-                        Renderer = (IBarcodeRenderer<Bitmap>)Activator.CreateInstance(Renderer)
-                    };
-                    Image image = writer.Write(data);
-                }
-                catch (Exception e)
-                {
-                    FPinOutSuccess[0] = false;
-                    FStatus[0] = e.Message;
-                }
-            }
-        }*/
+        public ILogger FLogger;
 
         public void OnImportsSatisfied()
         {
@@ -118,6 +62,10 @@ namespace VVVV.Spreads
             //to zero so ResizeAndDispose works properly.
             FTextureOut.SliceCount = 0;
         }
+
+        private EncodingOptions EncodingOptions { get; set; }
+
+        Bitmap bitmapData; //ToDo: should be collection
 
         //called when data for any output pin is requested
         public void Evaluate(int spreadMax)
@@ -134,10 +82,9 @@ namespace VVVV.Spreads
                     textureResource = CreateTextureResource(i);
                     info = textureResource.Metadata;
                 }
-                //update textures if their wave count changed
-                if (info.WaveCount != FWaveCountIn[i])
+                if (info.Data != FDataIn[i] || info.Format != FFormatIn[i] || info.Width != FWidthIn[i] || info.Height != FHeightIn[i])
                 {
-                    //info.WaveCount = FWaveCountIn[i];
+                    bitmapData = new Bitmap(GenerateBarcodeImage(FWidthIn[i], FHeightIn[i], FDataIn[i], FFormatIn[i]));
                     textureResource.NeedsUpdate = true;
                 }
                 else
@@ -148,10 +95,59 @@ namespace VVVV.Spreads
             }
         }
 
+        private Bitmap GenerateBarcodeImage(int width, int height, string data, BarcodeFormat format)
+        {
+            try
+            {
+                var writer = new BarcodeWriter
+                {
+                    Format = format,
+                    Options = EncodingOptions ?? new EncodingOptions
+                    {
+                        Height = height,
+                        Width = width,
+                        PureBarcode = true,
+                        Margin = 0,
+
+                    },
+                    Renderer = (IBarcodeRenderer<Bitmap>)Activator.CreateInstance(typeof(BitmapRenderer))
+                };
+                return writer.Write(data);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         TextureResource<Info> CreateTextureResource(int slice)
         {
-            var info = new Info() { Slice = slice, Width = FWidthIn[slice], Height = FHeightIn[slice] };
+            var info = new Info() {
+                Slice = slice,
+                Width = FWidthIn[slice],
+                Height = FHeightIn[slice]/*,
+                Data = FDataIn[slice],
+                Format = FFormatIn[slice]*/
+            };
             return TextureResource.Create(info, CreateTexture, UpdateTexture);
+        }
+
+        //this method gets called, when Reinitialize() was called in evaluate,
+        //or a graphics device asks for its data
+        Texture CreateTexture(Info info, Device device)
+        {
+            FLogger.Log(LogType.Debug, "Creating new texture at slice: " + info.Slice);
+            return TextureUtils.CreateTexture(device, Math.Max(info.Width, 1), Math.Max(info.Height, 1));
+        }
+
+        //this method gets called, when Update() was called in evaluate,
+        //or a graphics device asks for its texture, here you fill the texture with the actual data
+        //this is called for each renderer, careful here with multiscreen setups, in that case
+        //calculate the pixels in evaluate and just copy the data to the device texture here
+        unsafe void UpdateTexture(Info info, Texture texture)
+        {
+            TextureUtils.CopyBitmapToTexture(bitmapData, texture);
+            //TextureUtils.Fill32BitTexInPlace(texture, info, null);
         }
     }
 }
