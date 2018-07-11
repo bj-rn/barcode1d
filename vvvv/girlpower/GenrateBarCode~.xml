@@ -1,0 +1,201 @@
+<!DOCTYPE PATCH  SYSTEM "http://vvvv.org/versions/vvvv50alpha36.1.dtd" >
+   <PATCH nodename="C:\libs.vvvv\Barcode1d\vvvv\Spreadable Barcode1d\GenrateBarCode.v4p" systemname="GenrateBarCodeUPC (YR PM)" filename="C:\Users\randa\Desktop\GenrateBarCodeUPC (YR PM).v4p" scrollx="0" scrolly="0" locked="1">
+   <BOUNDS type="Window" left="8955" top="1470" width="8970" height="5100">
+   </BOUNDS>
+   <PACK Name="addonpack" Version="36.0.0">
+   </PACK>
+   <PACK Name="vvvv-ZeroMQ_Release_x64" Version="0.5.0">
+   </PACK>
+   <NODE nodename="IOBox (Enumerations)" componentmode="InABox" id="64">
+   <BOUNDS type="Box" left="4620" top="765" width="1095" height="855">
+   </BOUNDS>
+   <BOUNDS type="Node" left="4620" top="765" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Input Enum" slicecount="4" visible="1" values="QR_CODE,EAN_13,EAN_8,CODE_39">
+   </PIN>
+   <PIN pinname="Default" slicecount="1" values="AZTEC">
+   </PIN>
+   <PIN pinname="File Mask" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Maximum Characters" slicecount="1" values="-1">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="Format">
+   </PIN>
+   <PIN pinname="SliceCount Mode" slicecount="1" values="ColsRowsPages">
+   </PIN>
+   <PIN pinname="Rows" slicecount="1" values="4">
+   </PIN>
+   </NODE>
+   <PACK Name="dx11" Version="1.0.5">
+   </PACK>
+   <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="67" systemname="IOBox (Value Advanced)">
+   <BOUNDS type="Box" left="870" top="765" width="465" height="240">
+   </BOUNDS>
+   <BOUNDS type="Node" left="870" top="765" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Y Input Value" slicecount="1" visible="1" values="400">
+   </PIN>
+   <PIN pinname="Units" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Precision" slicecount="1" values="4">
+   </PIN>
+   <PIN pinname="Value Type" slicecount="1" values="Integer">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="Width">
+   </PIN>
+   </NODE>
+   <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="68" systemname="IOBox (Value Advanced)">
+   <BOUNDS type="Box" left="2115" top="765" width="525" height="240">
+   </BOUNDS>
+   <BOUNDS type="Node" left="2115" top="765" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Y Input Value" slicecount="1" visible="1" values="295">
+   </PIN>
+   <PIN pinname="Units" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Precision" slicecount="1" values="4">
+   </PIN>
+   <PIN pinname="Value Type" slicecount="1" values="Integer">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="Height">
+   </PIN>
+   </NODE>
+   <NODE systemname="IOBox (String)" nodename="IOBox (String)" componentmode="InABox" id="76">
+   <BOUNDS type="Node" left="2985" top="765" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="2985" top="765" width="1410" height="945">
+   </BOUNDS>
+   <PIN pinname="Rows" slicecount="1" values="4">
+   </PIN>
+   <PIN pinname="SliceCount Mode" slicecount="1" values="ColsRowsPages">
+   </PIN>
+   <PIN pinname="Input String" slicecount="4" values="http://vvvv.org,400414403162,65833254,1234">
+   </PIN>
+   <PIN pinname="Output String" visible="1">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="Data">
+   </PIN>
+   </NODE>
+   <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="77" systemname="IOBox (Value Advanced)">
+   <BOUNDS type="Box" left="5880" top="765" width="390" height="1320">
+   </BOUNDS>
+   <BOUNDS type="Node" left="5880" top="765" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Y Input Value" slicecount="4" visible="1" values="0,1,0,1">
+   </PIN>
+   <PIN pinname="Units" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Precision" slicecount="1" values="4">
+   </PIN>
+   <PIN pinname="Value Type" slicecount="1" values="Boolean">
+   </PIN>
+   <PIN pinname="Behavior" slicecount="1" values="Toggle">
+   </PIN>
+   <PIN pinname="SliceCount Mode" slicecount="1" values="ColsRowsPages">
+   </PIN>
+   <PIN pinname="Rows" slicecount="1" values="4">
+   </PIN>
+   <PIN pinname="X Input Value" slicecount="4" values="0,1,0,1">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="ShowText">
+   </PIN>
+   </NODE>
+   <NODE id="60" systemname="Barcode1d (EX9.Texture)" filename="..\..\..\libs.vvvv\Barcode1d\Barcode1d\bin\Debug\Barcode1d.dll" nodename="Barcode1d (EX9.Texture)" componentmode="Hidden">
+   <BOUNDS type="Node" left="885" top="2430" width="6285" height="270">
+   </BOUNDS>
+   <PIN pinname="Format" slicecount="1" visible="1" values="UPC_A">
+   </PIN>
+   <PIN pinname="Width" slicecount="1" visible="1" values="800">
+   </PIN>
+   <PIN pinname="Height" slicecount="1" visible="1" values="300">
+   </PIN>
+   <PIN pinname="Data" visible="1" slicecount="1" values="|[)&gt;~03001~02996336091062~029840~029002~0291Z14647438~029UPSN~029410E1W&cr;&lf;~029195~029~0291/1~029~029Y~029135Reo~029TAMPA~029FL~030~004|">
+   </PIN>
+   <PIN pinname="Texture Out" visible="1">
+   </PIN>
+   <PIN pinname="ShowText" visible="1">
+   </PIN>
+   <PIN pinname="FontSize" visible="1">
+   </PIN>
+   <PIN pinname="Margin" visible="1">
+   </PIN>
+   <PIN pinname="Status" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="77" srcpinname="Y Output Value" dstnodeid="60" dstpinname="ShowText" linkstyle="PolyLine">
+   </LINK>
+   <LINK srcnodeid="68" srcpinname="Y Output Value" dstnodeid="60" dstpinname="Height" linkstyle="PolyLine">
+   </LINK>
+   <LINK srcnodeid="67" srcpinname="Y Output Value" dstnodeid="60" dstpinname="Width" linkstyle="PolyLine">
+   </LINK>
+   <LINK srcnodeid="64" srcpinname="Output Enum" dstnodeid="60" dstpinname="Format" linkstyle="PolyLine">
+   </LINK>
+   <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="88" systemname="IOBox (Value Advanced)">
+   <BOUNDS type="Box" left="7110" top="765" width="795" height="240">
+   </BOUNDS>
+   <BOUNDS type="Node" left="7110" top="765" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Y Input Value" slicecount="1" visible="1" values="24">
+   </PIN>
+   <PIN pinname="Units" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Precision" slicecount="1" values="4">
+   </PIN>
+   <PIN pinname="Value Type" slicecount="1" values="Integer">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="FontSize">
+   </PIN>
+   <PIN pinname="X Input Value" slicecount="1" values="32">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="88" srcpinname="Y Output Value" dstnodeid="60" dstpinname="FontSize" linkstyle="PolyLine">
+   </LINK>
+   <PACK Name="VVVV.Packs" Version="0.2.0">
+   </PACK>
+   <NODE systemname="Preview (EX9.Texture)" filename="%VVVV%\addonpack\lib\nodes\modules\TextureFX\misc\Preview\Preview (EX9.Texture).v4p" nodename="Preview (EX9.Texture)" componentmode="Hidden" id="90">
+   <BOUNDS type="Node" left="870" top="3090" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Input" visible="1">
+   </PIN>
+   <PIN pinname="Show PerfMeter" slicecount="1" values="0">
+   </PIN>
+   <PIN pinname="Show Chess Pattern" slicecount="1" values="0">
+   </PIN>
+   <PIN pinname="SliceCount" slicecount="1" values="0">
+   </PIN>
+   <BOUNDS type="Box" left="870" top="3090">
+   </BOUNDS>
+   <PIN pinname="Show Texture Info" slicecount="1" values="0">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="60" srcpinname="Texture Out" dstnodeid="90" dstpinname="Input" linkstyle="PolyLine">
+   </LINK>
+   <LINK srcnodeid="76" srcpinname="Output String" dstnodeid="60" dstpinname="Data" linkstyle="Bezier">
+   <LINKPOINT x="3045" y="2070">
+   </LINKPOINT>
+   <LINKPOINT x="3375" y="2070">
+   </LINKPOINT>
+   </LINK>
+   <NODE nodename="IOBox (String)" componentmode="InABox" id="91">
+   <BOUNDS type="Box" left="4125" top="3090" width="3060" height="735">
+   </BOUNDS>
+   <BOUNDS type="Node" left="4125" top="3090" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Default" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="File Mask" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Maximum Characters" slicecount="1" values="-1">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="Status">
+   </PIN>
+   <PIN pinname="Rows" slicecount="1" values="4">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="60" srcpinname="Status" dstnodeid="91" dstpinname="Input String" linkstyle="Bezier">
+   <LINKPOINT x="6890" y="2875">
+   </LINKPOINT>
+   <LINKPOINT x="4405" y="2885">
+   </LINKPOINT>
+   </LINK>
+   </PATCH>
