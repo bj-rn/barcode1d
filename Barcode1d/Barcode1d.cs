@@ -2,7 +2,6 @@
 #region usings
 using SlimDX.Direct3D9;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Drawing;
@@ -24,8 +23,10 @@ namespace VVVV.Nodes
     [PluginInfo(Name = "Barcode1d",
                 Category = "EX9.Texture",
                 Version = "",
-                Help = "Basic template which creates a texture",
-                Tags = "c#")]
+                Help = "Generates an EX9 texture containing the barcode for the provided data in the specified format.",
+                Tags = "barcode",
+                Author = "ravazquez",
+                Credits = "thisisyr")]
     #endregion PluginInfo
     public class Barcode1d : IPluginEvaluate, IPartImportsSatisfiedNotification
     {
@@ -48,7 +49,7 @@ namespace VVVV.Nodes
         [Input("Height", DefaultValue = 64, MinValue = 1)]
         public ISpread<int> FHeightIn;
 
-        [Input("Data", DefaultString = "00000000000")]
+        [Input("Data", DefaultString = "00000000000000")]
         public ISpread<string> FDataIn;
 
         [Input("Format", DefaultNodeValue = BarcodeFormat.UPC_A)]
@@ -62,6 +63,9 @@ namespace VVVV.Nodes
 
         [Output("Texture Out")]
         public ISpread<TextureResource<Info>> FTextureOut;
+
+        [Output("Status")]
+        public ISpread<String> FStatusOut;
 
         [Import]
         public ILogger FLogger;
@@ -86,6 +90,7 @@ namespace VVVV.Nodes
             if (bitmaps == null || spreadMax != this.spreadMax)
                 bitmaps = new List<Bitmap>(spreadMax);
             this.spreadMax = spreadMax;
+            FStatusOut.SliceCount = spreadMax;
             FTextureOut.ResizeAndDispose(spreadMax, CreateTextureResource);
             for (int i = 0; i < spreadMax; i++)
             {
@@ -110,7 +115,7 @@ namespace VVVV.Nodes
                         info.Format = FFormatIn[i];
                         info.ShowText = FShowTextIn[i];
                         info.FontSize = FFontSizeIn[i];
-                        Bitmap bmp = new Bitmap(GenerateBarcodeImage(FWidthIn[i], FHeightIn[i], FDataIn[i], FFormatIn[i], !FShowTextIn[i], FMarginIn[i]));
+                        Bitmap bmp = new Bitmap(GenerateBarcodeImage(FWidthIn[i], FHeightIn[i], FDataIn[i], FFormatIn[i], !FShowTextIn[i], i));
                         if (bitmaps.Count <= i)
                             bitmaps.Add(bmp);
                         else
@@ -128,11 +133,10 @@ namespace VVVV.Nodes
             firstFrame = false;
         }
 
-        private Bitmap GenerateBarcodeImage(int width, int height, string data, BarcodeFormat format, bool showText, int margin)
+        private Bitmap GenerateBarcodeImage(int width, int height, string data, BarcodeFormat format, bool showText, int currentSlice)
         {
             try
             {
-                var cleanData = validateData(data, format);
                 var writer = new BarcodeWriter
                 {
                     Format = format,
@@ -144,44 +148,14 @@ namespace VVVV.Nodes
                     },
                     Renderer = renderer
                 };
-                return writer.Write(cleanData);
+                FStatusOut[currentSlice] = "Success";
+                return writer.Write(data);
             }
             catch (Exception e)
             {
-                //throw e;
+                FStatusOut[currentSlice] = e.Message;
                 return new Bitmap(width, height);
             }
-        }
-
-        private string validateData(string data, BarcodeFormat format){
-            var result = data;
-            var dataLength = 1;
-            switch (format)
-            {
-                case BarcodeFormat.CODABAR:
-                    dataLength = 3;
-                    break;
-                case BarcodeFormat.UPC_E:
-                    dataLength = 6;
-                    break;
-                case BarcodeFormat.UPC_A:
-                    dataLength = 11;
-                    break;
-                case BarcodeFormat.EAN_13:
-                    dataLength = 12;
-                    break;
-                default:
-                    dataLength = 1;
-                    break;
-            }
-
-            if (data.Length > dataLength)
-                result = data.Substring(0, dataLength);
-            while (result.Length < dataLength)
-            {
-                result = result.Insert(0, "0");
-            }
-            return result;
         }
 
         TextureResource<Info> CreateTextureResource(int slice)
