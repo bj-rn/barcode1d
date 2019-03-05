@@ -1,0 +1,141 @@
+<!DOCTYPE PATCH  SYSTEM "http://vvvv.org/versions/vvvv50beta38.1.dtd" >
+   <PATCH nodename="D:\_dev\barcode1d\vvvv\girlpower\Barcode1d (DX11.Texture) help.v4p" scrollx="0" scrolly="-360">
+   <BOUNDS type="Window" left="6800" top="3220" width="6370" height="8120">
+   </BOUNDS>
+   <NODE nodename="IOBox (String)" componentmode="InABox" id="3">
+   <BOUNDS type="Node" left="230" top="230" width="5100" height="450">
+   </BOUNDS>
+   <BOUNDS type="Box" left="230" top="230" width="5100" height="450">
+   </BOUNDS>
+   <PIN pinname="Input String" slicecount="1" visible="0" values="|Barcode1d (DX11.Texture)|">
+   </PIN>
+   <PIN pinname="Output String" slicecount="1" visible="0" values="||">
+   </PIN>
+   <PIN pinname="Size" slicecount="1" visible="1" values="14">
+   </PIN>
+   </NODE>
+   <NODE nodename="IOBox (String)" componentmode="InABox" id="2">
+   <BOUNDS type="Node" left="230" top="600" width="5100" height="600">
+   </BOUNDS>
+   <BOUNDS type="Box" left="230" top="600" width="5100" height="600">
+   </BOUNDS>
+   <PIN pinname="Input String" slicecount="1" visible="0" values="|Generates an DX11 texture containing the barcode for the provided data in the specified format.|">
+   </PIN>
+   <PIN pinname="Output String" slicecount="1" visible="0" values="||">
+   </PIN>
+   </NODE>
+   <NODE nodename="IOBox (String)" componentmode="InABox" id="7">
+   <BOUNDS type="Box" left="2135" top="1720" width="1395" height="825">
+   </BOUNDS>
+   <BOUNDS type="Node" left="2135" top="1720" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Input String" slicecount="4" visible="1" values="http://vvvv.org,400414403162,65833254,12345">
+   </PIN>
+   <PIN pinname="Default" slicecount="1" values="00000000000000">
+   </PIN>
+   <PIN pinname="File Mask" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Maximum Characters" slicecount="1" values="-1">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="Data">
+   </PIN>
+   <PIN pinname="Rows" slicecount="1" values="4">
+   </PIN>
+   <PIN pinname="SliceCount Mode" slicecount="1" values="ColsRowsPages">
+   </PIN>
+   <PIN pinname="Output String" visible="1">
+   </PIN>
+   </NODE>
+   <NODE nodename="IOBox (Enumerations)" componentmode="InABox" id="6">
+   <BOUNDS type="Box" left="3675" top="1690" width="945" height="870">
+   </BOUNDS>
+   <BOUNDS type="Node" left="3675" top="1690" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Input Enum" slicecount="4" visible="1" values="QR_CODE,EAN_13,EAN_8,CODE_39">
+   </PIN>
+   <PIN pinname="Default" slicecount="1" values="AZTEC">
+   </PIN>
+   <PIN pinname="File Mask" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Maximum Characters" slicecount="1" values="-1">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="Format">
+   </PIN>
+   <PIN pinname="SliceCount Mode" slicecount="1" values="ColsRowsPages">
+   </PIN>
+   <PIN pinname="Rows" slicecount="1" values="4">
+   </PIN>
+   <PIN pinname="Output Enum" visible="1">
+   </PIN>
+   </NODE>
+   <NODE systemname="Preview (DX11.Texture)" filename="%VVVV%\packs\dx11\nodes\plugins\base\VVVV.DX11.Nodes.dll" nodename="Preview (DX11.Texture)" componentmode="InABox" id="10">
+   <BOUNDS type="Node" left="1170" top="4210" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="1170" top="4210" width="3110" height="3270">
+   </BOUNDS>
+   <BOUNDS type="Window" left="14400" top="8790" width="4220" height="3560">
+   </BOUNDS>
+   <PIN pinname="Texture In" visible="1" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Index" visible="1">
+   </PIN>
+   </NODE>
+   <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="12">
+   <BOUNDS type="Box" left="1180" top="1760" width="800" height="480">
+   </BOUNDS>
+   <BOUNDS type="Node" left="1180" top="1760" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Y Input Value" slicecount="2" visible="1" values="256,256">
+   </PIN>
+   <PIN pinname="Units" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Precision" slicecount="1" values="4">
+   </PIN>
+   <PIN pinname="Value Type" slicecount="1" values="Integer">
+   </PIN>
+   <PIN pinname="Vector Size" slicecount="1" values="2">
+   </PIN>
+   <PIN pinname="Rows" slicecount="1" values="2">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="SizeXY">
+   </PIN>
+   </NODE>
+   <NODE systemname="LFO (Animation)" nodename="LFO (Animation)" componentmode="Hidden" id="14" hiddenwhenlocked="1">
+   <BOUNDS type="Node" left="1260" top="3560" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Cycles" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="14" srcpinname="Cycles" dstnodeid="10" dstpinname="Index" hiddenwhenlocked="1">
+   </LINK>
+   <PACK Name="dx11" Version="1.3.1">
+   </PACK>
+   <PACK Name="addonpack" Version="38.1.0">
+   </PACK>
+   <NODE systemname="Barcode1d (DX11.Texture)" filename="..\..\src\bin\Debug\Barcode1d.dll" nodename="Barcode1d (DX11.Texture)" componentmode="Hidden" id="11">
+   <BOUNDS type="Node" left="1160" top="3010" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="1160" top="3010" width="2000" height="2000">
+   </BOUNDS>
+   <PIN pinname="Texture Out" visible="1">
+   </PIN>
+   <PIN pinname="Data" slicecount="1" visible="1" values="1925">
+   </PIN>
+   <PIN pinname="Format" slicecount="1" visible="1" values="QR_CODE">
+   </PIN>
+   <PIN pinname="Size WidthHeight" visible="1">
+   </PIN>
+   <PIN pinname="SizeXY" visible="1">
+   </PIN>
+   <PIN pinname="ShowText" slicecount="1" values="0">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="11" srcpinname="Texture Out" dstnodeid="10" dstpinname="Texture In">
+   </LINK>
+   <LINK srcnodeid="12" srcpinname="Y Output Value" dstnodeid="11" dstpinname="SizeXY">
+   </LINK>
+   <LINK srcnodeid="7" srcpinname="Output String" dstnodeid="11" dstpinname="Data">
+   </LINK>
+   <LINK srcnodeid="6" srcpinname="Output Enum" dstnodeid="11" dstpinname="Format">
+   </LINK>
+   </PATCH>
