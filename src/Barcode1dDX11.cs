@@ -40,11 +40,21 @@ namespace VVVV.Nodes
         [Input("Format", DefaultNodeValue = BarcodeFormat.UPC_A)]
         public IDiffSpread<BarcodeFormat> FFormatIn;
 
+        [Input("ShowText", DefaultBoolean = false)]
+        public IDiffSpread<bool> FShowTextIn;
+
+        [Input("Font", EnumName = "SystemFonts")]
+        IDiffSpread<EnumEntry> FFontIn;
+
+        [Input("FontSize", DefaultValue = 12)]
+        public IDiffSpread<int> FFontSizeIn;
+
         [Output("Texture Out")]
         public ISpread<DX11Resource<DX11Texture2D>> FTextureOut;
 
         [Output("Status")]
         public ISpread<String> FStatusOut;
+
 
         [Import]
         public ILogger FLogger;
@@ -57,7 +67,8 @@ namespace VVVV.Nodes
         //called when data for any output pin is requested
         public void Evaluate(int spreadMax)
         {
-            if (FSizeIn.IsChanged || FDataIn.IsChanged || FFormatIn.IsChanged)
+            if (FSizeIn.IsChanged || FDataIn.IsChanged || FFormatIn.IsChanged 
+                || FShowTextIn.IsChanged || FFontIn.IsChanged ||FFontSizeIn.IsChanged)
 
             {
                 for (int i = 0; i < this.FTextureOut.SliceCount; i++)
@@ -93,6 +104,7 @@ namespace VVVV.Nodes
                     {
                         Width = w,
                         Height = h,
+                        PureBarcode = !FShowTextIn[currentSlice],
                     },
                     Renderer = renderer
                 };
@@ -113,6 +125,8 @@ namespace VVVV.Nodes
                 if (!this.FTextureOut[i].Contains(context))
                 {
                     renderer = new BitmapRenderer();
+                    renderer.TextFont = new System.Drawing.Font(FFontIn[i].Name, FFontSizeIn[i]);
+
                     Bitmap bmp = new Bitmap (GenerateBarcodeImage(i));
 
                     DX11DynamicTexture2D tex = new DX11DynamicTexture2D(context, bmp.Width, bmp.Height, SlimDX.DXGI.Format.R8G8B8A8_UNorm);
