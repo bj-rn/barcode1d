@@ -58,6 +58,9 @@ namespace VVVV.Nodes
         [Input("ShowText", DefaultBoolean = false)]
         public ISpread<bool> FShowTextIn;
 
+        [Input("Font", EnumName = "SystemFonts")]
+        IDiffSpread<EnumEntry> FFontIn;
+
         [Input("FontSize", DefaultValue = 32)]
         public ISpread<int> FFontSizeIn;
 
@@ -98,7 +101,7 @@ namespace VVVV.Nodes
                 if (FWidthIn[i] > 0 && FHeightIn[i] > 0 && FFontSizeIn[i] > 0)
                 {
                     renderer = new BitmapRenderer();
-                    renderer.TextFont = new System.Drawing.Font("Arial", FFontSizeIn[i]);
+                    renderer.TextFont = new System.Drawing.Font(FFontIn[i].Name, FFontSizeIn[i]);
                     var info = textureResource.Metadata;
                     //recreate textures if resolution was changed
                     if (info.Width != FWidthIn[i] || info.Height != FHeightIn[i])
