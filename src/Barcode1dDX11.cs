@@ -31,7 +31,7 @@ namespace VVVV.Nodes
     public class Barcode1dDX11 : IPluginEvaluate, IDX11ResourceHost, IDisposable
     {
 
-        [Input("Size", DefaultValues = new double[] {64, 64}, DimensionNames = new string[] { "Width", "Height" }, MinValue = 1, AsInt = true)]
+        [Input("Size", DefaultValues = new double[] {64, 64}, MinValue = 1, AsInt = true)]
         public IDiffSpread<Vector2D> FSizeIn;
 
         [Input("Data", DefaultString = "00000000000000")]
