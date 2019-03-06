@@ -10,14 +10,13 @@ using VVVV.PluginInterfaces.V2;
 using VVVV.Utils.VMath;
 
 using FeralTic.DX11.Resources;
-using VVVV.DX11;
 
 using ZXing;
 using ZXing.Common;
 using ZXing.Rendering;
 #endregion usings
 
-namespace VVVV.Nodes
+namespace VVVV.DX11.Nodes
 {
     #region PluginInfo
     [PluginInfo(Name = "Barcode1d",
@@ -67,21 +66,21 @@ namespace VVVV.Nodes
                 || FShowTextIn.IsChanged || FFontIn.IsChanged ||FFontSizeIn.IsChanged)
 
             {
-                for (int i = 0; i < this.FTextureOut.SliceCount; i++)
+                for (int i = 0; i < FTextureOut.SliceCount; i++)
                 {
-                    if (this.FTextureOut[i] != null)
+                    if (FTextureOut[i] != null)
                     {
-                        this.FTextureOut[i].Dispose();
+                        FTextureOut[i].Dispose();
                     }
                 }
             }
 
-            this.FTextureOut.SliceCount = spreadMax;
-            for (int i = 0; i < this.FTextureOut.SliceCount; i++)
+            FTextureOut.SliceCount = spreadMax;
+            for (int i = 0; i < FTextureOut.SliceCount; i++)
             {
-                if (this.FTextureOut[i] == null)
+                if (FTextureOut[i] == null)
                 {
-                    this.FTextureOut[i] = new DX11Resource<DX11Texture2D>();
+                    FTextureOut[i] = new DX11Resource<DX11Texture2D>();
                 }
             }
         }
@@ -116,9 +115,9 @@ namespace VVVV.Nodes
 
         public void Update(FeralTic.DX11.DX11RenderContext context)
         {
-            for (int i = 0; i < this.FTextureOut.SliceCount; i++)
+            for (int i = 0; i < FTextureOut.SliceCount; i++)
             {
-                if (!this.FTextureOut[i].Contains(context))
+                if (!FTextureOut[i].Contains(context))
                 {
                     renderer = new BitmapRenderer();
                     renderer.TextFont = new System.Drawing.Font(FFontIn[i].Name, FFontSizeIn[i]);
@@ -140,7 +139,7 @@ namespace VVVV.Nodes
                         tex.WriteData(data.Scan0, bmp.Width * bmp.Height * 4);
                     }
 
-                    this.FTextureOut[i][context] = tex;
+                    FTextureOut[i][context] = tex;
 
                 }
             }
@@ -148,12 +147,12 @@ namespace VVVV.Nodes
 
         public void Destroy(FeralTic.DX11.DX11RenderContext context, bool force)
         {
-            this.FTextureOut.SafeDisposeAll(context);
+            FTextureOut.SafeDisposeAll(context);
         }
 
         public void Dispose()
         {
-            this.FTextureOut.SafeDisposeAll();
+            FTextureOut.SafeDisposeAll();
         }
     }
 }
