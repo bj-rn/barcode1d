@@ -1,0 +1,125 @@
+<!DOCTYPE PATCH  SYSTEM "http://vvvv.org/versions/vvvv50beta38.1.dtd" >
+   <PATCH nodename="D:\_dev\barcode1d\vvvv\girlpower\Barcode1d (EX9.Texture) help.v4p" scrollx="0" scrolly="-360">
+   <BOUNDS type="Window" left="-130" top="0" width="6370" height="5080">
+   </BOUNDS>
+   <NODE nodename="IOBox (String)" componentmode="InABox" id="3">
+   <BOUNDS type="Node" left="230" top="230" width="5100" height="450">
+   </BOUNDS>
+   <BOUNDS type="Box" left="230" top="230" width="5100" height="450">
+   </BOUNDS>
+   <PIN pinname="Input String" slicecount="1" visible="0" values="|Barcode1d (EX9.Texture)|">
+   </PIN>
+   <PIN pinname="Output String" slicecount="1" visible="0" values="||">
+   </PIN>
+   <PIN pinname="Size" slicecount="1" visible="1" values="14">
+   </PIN>
+   </NODE>
+   <NODE nodename="IOBox (String)" componentmode="InABox" id="2">
+   <BOUNDS type="Node" left="230" top="600" width="5100" height="600">
+   </BOUNDS>
+   <BOUNDS type="Box" left="230" top="600" width="5100" height="600">
+   </BOUNDS>
+   <PIN pinname="Input String" slicecount="1" visible="0" values="|Generates an EX9 texture containing the barcode for the provided data in the specified format.|">
+   </PIN>
+   <PIN pinname="Output String" slicecount="1" visible="0" values="||">
+   </PIN>
+   </NODE>
+   <NODE nodename="IOBox (String)" componentmode="InABox" id="7">
+   <BOUNDS type="Box" left="2135" top="1720" width="1395" height="825">
+   </BOUNDS>
+   <BOUNDS type="Node" left="2135" top="1720" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Input String" slicecount="4" visible="1" values="http://vvvv.org,400414403162,65833254,12345">
+   </PIN>
+   <PIN pinname="Default" slicecount="1" values="00000000000000">
+   </PIN>
+   <PIN pinname="File Mask" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Maximum Characters" slicecount="1" values="-1">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="Data">
+   </PIN>
+   <PIN pinname="Rows" slicecount="1" values="4">
+   </PIN>
+   <PIN pinname="SliceCount Mode" slicecount="1" values="ColsRowsPages">
+   </PIN>
+   <PIN pinname="Output String" visible="1">
+   </PIN>
+   </NODE>
+   <NODE nodename="IOBox (Enumerations)" componentmode="InABox" id="6">
+   <BOUNDS type="Box" left="3675" top="1690" width="950" height="870">
+   </BOUNDS>
+   <BOUNDS type="Node" left="3675" top="1690" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Input Enum" slicecount="4" visible="1" values="QR_CODE,EAN_13,EAN_8,CODE_39">
+   </PIN>
+   <PIN pinname="Default" slicecount="1" values="AZTEC">
+   </PIN>
+   <PIN pinname="File Mask" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Maximum Characters" slicecount="1" values="-1">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="Format">
+   </PIN>
+   <PIN pinname="SliceCount Mode" slicecount="1" values="ColsRowsPages">
+   </PIN>
+   <PIN pinname="Rows" slicecount="1" values="4">
+   </PIN>
+   <PIN pinname="Output Enum" visible="1">
+   </PIN>
+   </NODE>
+   <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="12">
+   <BOUNDS type="Box" left="1180" top="1760" width="800" height="480">
+   </BOUNDS>
+   <BOUNDS type="Node" left="1180" top="1760" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Y Input Value" slicecount="2" visible="1" values="256,256">
+   </PIN>
+   <PIN pinname="Units" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Precision" slicecount="1" values="4">
+   </PIN>
+   <PIN pinname="Value Type" slicecount="1" values="Integer">
+   </PIN>
+   <PIN pinname="Vector Size" slicecount="1" values="2">
+   </PIN>
+   <PIN pinname="Rows" slicecount="1" values="2">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="SizeXY">
+   </PIN>
+   <PIN pinname="Y Output Value" visible="1">
+   </PIN>
+   </NODE>
+   <PACK Name="dx11" Version="1.3.1">
+   </PACK>
+   <PACK Name="addonpack" Version="38.1.0">
+   </PACK>
+   <NODE systemname="Barcode1d (EX9.Texture)" filename="..\..\lib\Barcode1d.dll" nodename="Barcode1d (EX9.Texture)" componentmode="Hidden" id="15">
+   <BOUNDS type="Node" left="1170" top="2980" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="1170" top="2980" width="2000" height="2000">
+   </BOUNDS>
+   <PIN pinname="SizeXY" visible="1">
+   </PIN>
+   <PIN pinname="Data" visible="1">
+   </PIN>
+   <PIN pinname="Format" visible="1">
+   </PIN>
+   <PIN pinname="Texture Out" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="12" srcpinname="Y Output Value" dstnodeid="15" dstpinname="SizeXY">
+   </LINK>
+   <LINK srcnodeid="7" srcpinname="Output String" dstnodeid="15" dstpinname="Data">
+   </LINK>
+   <LINK srcnodeid="6" srcpinname="Output Enum" dstnodeid="15" dstpinname="Format">
+   </LINK>
+   <NODE systemname="Preview (EX9.Texture)" filename="%VVVV%\addonpack\lib\nodes\modules\TextureFX\misc\Preview\Preview (EX9.Texture).v4p" nodename="Preview (EX9.Texture)" componentmode="Hidden" id="16">
+   <BOUNDS type="Node" left="1170" top="3790" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Input" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="15" srcpinname="Texture Out" dstnodeid="16" dstpinname="Input">
+   </LINK>
+   </PATCH>
