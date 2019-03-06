@@ -16,8 +16,6 @@ using ZXing.Common;
 using ZXing.Rendering;
 #endregion usings
 
-//here you can change the vertex type
-
 namespace VVVV.Nodes
 {
     #region PluginInfo

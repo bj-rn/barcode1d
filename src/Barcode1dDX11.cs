@@ -55,16 +55,12 @@ namespace VVVV.Nodes
         [Output("Status")]
         public ISpread<String> FStatusOut;
 
-
         [Import]
         public ILogger FLogger;
-
 
         private EncodingOptions EncodingOptions { get; set; }
         BitmapRenderer renderer;
 
-
-        //called when data for any output pin is requested
         public void Evaluate(int spreadMax)
         {
             if (FSizeIn.IsChanged || FDataIn.IsChanged || FFormatIn.IsChanged 
