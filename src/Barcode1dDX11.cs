@@ -76,6 +76,7 @@ namespace VVVV.DX11.Nodes
             }
 
             FTextureOut.SliceCount = spreadMax;
+            FStatusOut.SliceCount = spreadMax;
             for (int i = 0; i < FTextureOut.SliceCount; i++)
             {
                 if (FTextureOut[i] == null)
