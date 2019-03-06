@@ -101,6 +101,7 @@
   <ItemGroup>
     <Compile Include="Barcode1d.cs" />
     <Compile Include="Barcode1dDX11.cs" />
+    <Compile Include="Barcode1dDX11Reader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
