@@ -71,7 +71,7 @@
    <NODE systemname="Preview (DX11.Texture)" filename="%VVVV%\packs\dx11\nodes\plugins\base\VVVV.DX11.Nodes.dll" nodename="Preview (DX11.Texture)" componentmode="InABox" id="10">
    <BOUNDS type="Node" left="1170" top="4210" width="100" height="100">
    </BOUNDS>
-   <BOUNDS type="Box" left="1170" top="4210" width="3110" height="3270">
+   <BOUNDS type="Box" left="1170" top="4210" width="2320" height="2430">
    </BOUNDS>
    <BOUNDS type="Window" left="14400" top="8790" width="4220" height="3560">
    </BOUNDS>
@@ -112,7 +112,7 @@
    </PACK>
    <PACK Name="addonpack" Version="38.1.0">
    </PACK>
-   <NODE systemname="Barcode1d (DX11.Texture)" filename="..\..\src\bin\Debug\Barcode1d.dll" nodename="Barcode1d (DX11.Texture)" componentmode="Hidden" id="11">
+   <NODE systemname="Barcode1d (DX11.Texture)" filename="..\..\lib\Barcode1d.dll" nodename="Barcode1d (DX11.Texture)" componentmode="Hidden" id="11">
    <BOUNDS type="Node" left="1160" top="3010" width="100" height="100">
    </BOUNDS>
    <BOUNDS type="Box" left="1160" top="3010" width="2000" height="2000">
