@@ -10,6 +10,7 @@ using VVVV.PluginInterfaces.V1;
 using VVVV.PluginInterfaces.V2;
 using VVVV.PluginInterfaces.V2.EX9;
 using VVVV.Utils.SlimDX;
+using VVVV.Utils.VMath;
 using ZXing;
 using ZXing.Common;
 using ZXing.Rendering;
@@ -43,11 +44,9 @@ namespace VVVV.Nodes
             public int FontSize;
         }
 
-        [Input("Width", DefaultValue = 64, MinValue = 1)]
-        public ISpread<int> FWidthIn;
 
-        [Input("Height", DefaultValue = 64, MinValue = 1)]
-        public ISpread<int> FHeightIn;
+        [Input("Size", DefaultValues = new double[] { 64, 64 }, MinValue = 1, AsInt = true)]
+        public ISpread<Vector2D> FSizeIn;
 
         [Input("Data", DefaultString = "00000000000000")]
         public ISpread<string> FDataIn;
@@ -98,27 +97,31 @@ namespace VVVV.Nodes
             for (int i = 0; i < spreadMax; i++)
             {
                 var textureResource = FTextureOut[i];
-                if (FWidthIn[i] > 0 && FHeightIn[i] > 0 && FFontSizeIn[i] > 0)
+
+                int w = (int) FSizeIn[i].x;
+                int h = (int)FSizeIn[i].y;
+
+                if (w > 0 && h > 0 && FFontSizeIn[i] > 0)
                 {
                     renderer = new BitmapRenderer();
                     renderer.TextFont = new System.Drawing.Font(FFontIn[i].Name, FFontSizeIn[i]);
                     var info = textureResource.Metadata;
                     //recreate textures if resolution was changed
-                    if (info.Width != FWidthIn[i] || info.Height != FHeightIn[i])
+                    if (info.Width != w || info.Height != h)
                     {
                         textureResource.Dispose();
                         textureResource = CreateTextureResource(i);
                         info = textureResource.Metadata;
                     }
                     if (info.Data != FDataIn[i] || info.Format != FFormatIn[i] ||
-                        info.Width != FWidthIn[i] || info.Height != FHeightIn[i] ||
+                        info.Width != w || info.Height != h ||
                         info.ShowText != FShowTextIn[i] || info.FontSize != FFontSizeIn[i] || firstFrame)
                     {
                         info.Data = FDataIn[i];
                         info.Format = FFormatIn[i];
                         info.ShowText = FShowTextIn[i];
                         info.FontSize = FFontSizeIn[i];
-                        Bitmap bmp = new Bitmap(GenerateBarcodeImage(FWidthIn[i], FHeightIn[i], FDataIn[i], FFormatIn[i], !FShowTextIn[i], i));
+                        Bitmap bmp = new Bitmap(GenerateBarcodeImage(w, h, FDataIn[i], FFormatIn[i], !FShowTextIn[i], i));
                         if (bitmaps.Count <= i)
                             bitmaps.Add(bmp);
                         else
@@ -165,8 +168,8 @@ namespace VVVV.Nodes
         {
             var info = new Info() {
                 Slice = slice,
-                Width = FWidthIn[slice],
-                Height = FHeightIn[slice],
+                Width = (int) FSizeIn[slice].x,
+                Height = (int) FSizeIn[slice].y,
                 Data = FDataIn[slice],
                 Format = FFormatIn[slice]
             };
