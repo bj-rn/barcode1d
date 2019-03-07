@@ -35,10 +35,13 @@ namespace VVVV.DX11.Nodes
         protected ISpread<bool> FRead;
 
         [Output("Output")]
-        public ISpread<ISpread<String>> FOutput;
+        protected ISpread<ISpread<String>> FOutput;
 
-        [Output("Valid")]
-        protected ISpread<ISpread<bool>> FOutValid;
+        [Output("Format")]
+        protected ISpread<ISpread<String>> FFormat;
+
+        [Output("Status")]
+        protected ISpread<ISpread<String>> FStatus;
 
         [Import()]
         protected IPluginHost FHost;
@@ -66,12 +69,14 @@ namespace VVVV.DX11.Nodes
                 for (int i = 0; i < FOutput.SliceCount; i++)
                 {
                     FOutput[i].SliceCount = 0;
-                    FOutValid[i].SliceCount = 0;
+                    FFormat[i].SliceCount = 0;
+                    FStatus[i].SliceCount = 0;
                 }
 
 
                 FOutput.SliceCount = 1;
-                FOutValid.SliceCount = 1;
+                FFormat.SliceCount = 1;
+                FStatus.SliceCount = 1;
             }
 
             if (this.FTextureIn.IsConnected)
@@ -79,13 +84,14 @@ namespace VVVV.DX11.Nodes
 
                 RenderRequest?.Invoke(this, FHost);
 
-                if (AssignedContext == null) {FOutValid.SliceCount = 0; return; }
+                if (AssignedContext == null) {FStatus.SliceCount = 0; return; }
                 //Do NOT cache this, assignment done by the host
 
                 var context = AssignedContext;
 
                 FOutput.SliceCount = SpreadMax;
-                FOutValid.SliceCount = SpreadMax;
+                FFormat.SliceCount = SpreadMax;
+                FStatus.SliceCount = SpreadMax;
 
                 for (int i = 0; i < SpreadMax; i++)
                 {
@@ -93,7 +99,8 @@ namespace VVVV.DX11.Nodes
                     {
 
                        FOutput[i].SliceCount = 0;
-                       FOutValid[i].SliceCount = 0;
+                       FFormat[i].SliceCount = 0;
+                       FStatus[i].SliceCount = 0;
 
                         var reader = new ZXing.BarcodeReader();
 
@@ -111,35 +118,40 @@ namespace VVVV.DX11.Nodes
                             {
                                 var count = results.Length;
                                 FOutput[i].SliceCount = count;
-                                FOutValid[i].SliceCount = count;
+                                FFormat[i].SliceCount = count;
+                                FStatus[i].SliceCount = count;
 
                                 for (int j = 0; j < count; j++)
                                 {
                                     var result = results[j];
-                                    FOutput[i][j] = ((ZXing.Result)(result)).Text;
-                                    FOutValid[i][j] = true;
+                                    FOutput[i][j] = result.Text;
+                                    FFormat[i][j] = result.BarcodeFormat.ToString();
+                                    FStatus[i][j] = "Success";
+
+                               
                                 }
                                 
                             }
                             else
                             {
                                 FOutput[i].SliceCount = 1;
-                                FOutValid[i].SliceCount = 1;
+                                FFormat[i].SliceCount = 1;
+                                FStatus[i].SliceCount = 1;
                                 FOutput[i][0] = "";
-                                FOutValid[i][0] = false;
+                                FFormat[i][0] = "";
+                                FStatus[i][0] = "No Barcode Found";
                             }
-
-                        
-                            
                             
                         }
                         catch (Exception ex)
                         {
                             FLogger.Log(ex);
                             FOutput[i].SliceCount = 1;
-                            FOutValid[i].SliceCount = 1;
+                            FFormat[i].SliceCount = 1;
+                            FStatus[i].SliceCount = 1;
                             FOutput[i][0] = "";
-                            FOutValid[i][0] = false;
+                            FFormat[i][0] = "";
+                            FStatus[i][0] = ex.Message;
                         }
                     }
                    
@@ -148,7 +160,8 @@ namespace VVVV.DX11.Nodes
             else
             {
                 FOutput.SliceCount = 1;
-                FOutValid.SliceCount = 1;
+                FFormat.SliceCount = 1;
+                FStatus.SliceCount = 1;
 
             }
         }
