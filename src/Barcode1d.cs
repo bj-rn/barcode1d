@@ -23,9 +23,9 @@ namespace VVVV.Nodes
                 Category = "EX9.Texture",
                 Version = "",
                 Help = "Generates an EX9 texture containing the barcode for the provided data in the specified format.",
-                Tags = "barcode",
+                Tags = "barcode, ZXing",
                 Author = "ravazquez",
-                Credits = "thisisyr")]
+                Credits = "thisisyr, ZXing.Net")]
     #endregion PluginInfo
     public class Barcode1d : IPluginEvaluate, IPartImportsSatisfiedNotification
     {

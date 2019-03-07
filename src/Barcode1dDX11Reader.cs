@@ -17,11 +17,11 @@ using ZXing;
 
 namespace VVVV.DX11.Nodes
 {
-    [PluginInfo(Name = "Barcode1d", 
+    [PluginInfo(Name = "BarcodeReader", 
         Category = "DX11.Texture", 
-        Version = "Reader",
+        Version = "String",
         Help = "Tries to read barcode(s) from provided textures",
-        Tags = "barcode",
+        Tags = "barcode, ZXing",
         Author = "bj-rn", 
         Credits = "kiilo, sebl, vux, ZXing.Net", 
         AutoEvaluate = true)]
