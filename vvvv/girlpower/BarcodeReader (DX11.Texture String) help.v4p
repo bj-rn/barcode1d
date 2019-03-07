@@ -1,13 +1,13 @@
 <!DOCTYPE PATCH  SYSTEM "http://vvvv.org/versions/vvvv50beta38.1.dtd" >
    <PATCH nodename="D:\_dev\barcode1d\vvvv\girlpower\Barcode1d (DX11.Texture Reader) help.v4p" scrollx="10" scrolly="-360">
-   <BOUNDS type="Window" left="0" top="0" width="8450" height="10040">
+   <BOUNDS type="Window" left="3090" top="1440" width="9850" height="10040">
    </BOUNDS>
    <NODE nodename="IOBox (String)" componentmode="InABox" id="3">
    <BOUNDS type="Node" left="230" top="230" width="5100" height="450">
    </BOUNDS>
    <BOUNDS type="Box" left="230" top="230" width="5100" height="450">
    </BOUNDS>
-   <PIN pinname="Input String" slicecount="1" visible="0" values="|Barcode1d (DX11.Texture Reader)|">
+   <PIN pinname="Input String" slicecount="1" visible="0" values="|BarcodeReader (DX11.Texture String)|">
    </PIN>
    <PIN pinname="Output String" slicecount="1" visible="0" values="||">
    </PIN>
@@ -17,7 +17,7 @@
    <NODE nodename="IOBox (String)" componentmode="InABox" id="2">
    <BOUNDS type="Node" left="230" top="600" width="5100" height="600">
    </BOUNDS>
-   <BOUNDS type="Box" left="230" top="600" width="5100" height="600">
+   <BOUNDS type="Box" left="230" top="600" width="4970" height="240">
    </BOUNDS>
    <PIN pinname="Input String" slicecount="1" visible="0" values="||">
    </PIN>
@@ -69,9 +69,9 @@
    </PIN>
    </NODE>
    <NODE systemname="Preview (DX11.Texture)" filename="%VVVV%\packs\dx11\nodes\plugins\base\VVVV.DX11.Nodes.dll" nodename="Preview (DX11.Texture)" componentmode="InABox" id="6">
-   <BOUNDS type="Node" left="1740" top="7730" width="100" height="100">
+   <BOUNDS type="Node" left="1760" top="7970" width="100" height="100">
    </BOUNDS>
-   <BOUNDS type="Box" left="1740" top="7730" width="2630" height="1440">
+   <BOUNDS type="Box" left="1760" top="7970" width="2630" height="1440">
    </BOUNDS>
    <BOUNDS type="Window" left="14400" top="8790" width="4220" height="3560">
    </BOUNDS>
@@ -277,9 +277,9 @@
    <LINK srcnodeid="13" srcpinname="Output Node" dstnodeid="20" dstpinname="Input 2" hiddenwhenlocked="1">
    </LINK>
    <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="21">
-   <BOUNDS type="Box" left="6690" top="2400" width="370" height="710">
+   <BOUNDS type="Box" left="7720" top="2420" width="370" height="710">
    </BOUNDS>
-   <BOUNDS type="Node" left="6690" top="2400" width="0" height="0">
+   <BOUNDS type="Node" left="7720" top="2420" width="0" height="0">
    </BOUNDS>
    <PIN pinname="Units" slicecount="1" values="||">
    </PIN>
@@ -289,7 +289,7 @@
    </PIN>
    <PIN pinname="Rows" slicecount="1" values="3">
    </PIN>
-   <PIN pinname="Y Input Value" slicecount="3" values="0,0,0">
+   <PIN pinname="Y Input Value" slicecount="3" values="0,0,0" visible="1">
    </PIN>
    <PIN pinname="Vector Size" slicecount="1" values="3">
    </PIN>
@@ -317,43 +317,17 @@
    </PIN>
    <PIN pinname="Descriptive Name" slicecount="1" values="Output">
    </PIN>
+   <PIN pinname="Input String" visible="1">
+   </PIN>
    </NODE>
    <NODE systemname="Blinker (Animation)" nodename="Blinker (Animation)" componentmode="Hidden" id="23" hiddenwhenlocked="1">
-   <BOUNDS type="Node" left="6250" top="1100" width="100" height="100">
+   <BOUNDS type="Node" left="6200" top="1440" width="100" height="100">
    </BOUNDS>
    <PIN pinname="BlinkStyle" slicecount="1" values="BlinkSlow">
    </PIN>
    <PIN pinname="Output" visible="1">
    </PIN>
    </NODE>
-   <NODE nodename="Barcode1d (DX11.Texture Reader)" componentmode="Hidden" id="0" systemname="Barcode1d (DX11.Texture Reader)" filename="..\..\lib\Barcode1d.dll">
-   <BOUNDS type="Node" left="5100" top="1540" width="880" height="270">
-   </BOUNDS>
-   <BOUNDS type="Box" left="5100" top="1540" width="0" height="0">
-   </BOUNDS>
-   <PIN pinname="Texture In" visible="1">
-   </PIN>
-   <PIN pinname="Read" slicecount="1" visible="1" values="0">
-   </PIN>
-   <PIN pinname="Output Bin Size" visible="1">
-   </PIN>
-   <PIN pinname="Output" visible="1">
-   </PIN>
-   </NODE>
-   <LINK srcnodeid="20" srcpinname="Output" dstnodeid="0" dstpinname="Texture In">
-   <LINKPOINT x="2340" y="7610">
-   </LINKPOINT>
-   <LINKPOINT x="7420" y="7610">
-   </LINKPOINT>
-   <LINKPOINT x="7420" y="560">
-   </LINKPOINT>
-   </LINK>
-   <LINK srcnodeid="0" srcpinname="Output Bin Size" dstnodeid="21" dstpinname="Y Input Value">
-   </LINK>
-   <LINK srcnodeid="0" srcpinname="Output" dstnodeid="22" dstpinname="Input String">
-   </LINK>
-   <LINK srcnodeid="23" srcpinname="Output" dstnodeid="0" dstpinname="Read">
-   </LINK>
    <NODE systemname="Barcode1d (DX11.Texture)" filename="..\..\lib\Barcode1d.dll" nodename="Barcode1d (DX11.Texture)" componentmode="Hidden" id="7" hiddenwhenlocked="1">
    <BOUNDS type="Node" left="390" top="2700" width="100" height="100">
    </BOUNDS>
@@ -380,4 +354,70 @@
    </LINK>
    <LINK srcnodeid="7" srcpinname="Texture Out" dstnodeid="13" dstpinname="Input Node" hiddenwhenlocked="1">
    </LINK>
+   <NODE systemname="BarcodeReader (DX11.Texture String)" filename="..\..\lib\Barcode1d.dll" nodename="BarcodeReader (DX11.Texture String)" componentmode="Hidden" id="24">
+   <BOUNDS type="Node" left="5090" top="1830" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="5090" top="1830" width="2000" height="2000">
+   </BOUNDS>
+   <PIN pinname="Output" visible="1">
+   </PIN>
+   <PIN pinname="Output Bin Size" visible="1">
+   </PIN>
+   <PIN pinname="Format" visible="1">
+   </PIN>
+   <PIN pinname="Texture In" visible="1">
+   </PIN>
+   <PIN pinname="Read" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="24" srcpinname="Output" dstnodeid="22" dstpinname="Input String">
+   </LINK>
+   <LINK srcnodeid="24" srcpinname="Output Bin Size" dstnodeid="21" dstpinname="Y Input Value">
+   </LINK>
+   <NODE nodename="IOBox (String)" componentmode="InABox" id="25">
+   <BOUNDS type="Box" left="6680" top="2400" width="870" height="780">
+   </BOUNDS>
+   <BOUNDS type="Node" left="6680" top="2400" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Default" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="File Mask" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Maximum Characters" slicecount="1" values="-1">
+   </PIN>
+   <PIN pinname="Rows" slicecount="1" values="4">
+   </PIN>
+   <PIN pinname="Show Grid" slicecount="1" values="1">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="Format">
+   </PIN>
+   <PIN pinname="Input String" visible="1" slicecount="1" values="||">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="24" srcpinname="Format" dstnodeid="25" dstpinname="Input String">
+   </LINK>
+   <LINK srcnodeid="20" srcpinname="Output" dstnodeid="24" dstpinname="Texture In">
+   <LINKPOINT x="2350" y="7910">
+   </LINKPOINT>
+   <LINKPOINT x="9330" y="7910">
+   </LINKPOINT>
+   <LINKPOINT x="9330" y="70">
+   </LINKPOINT>
+   </LINK>
+   <LINK srcnodeid="23" srcpinname="Output" dstnodeid="24" dstpinname="Read" hiddenwhenlocked="1">
+   </LINK>
+   <NODE nodename="IOBox (String)" systemname="IOBox (String)" componentmode="InABox" id="26">
+   <BOUNDS type="Node" left="240" top="710" width="3420" height="230">
+   </BOUNDS>
+   <BOUNDS type="Box" left="240" top="710" width="3420" height="230">
+   </BOUNDS>
+   <PIN pinname="Input String" visible="0" slicecount="1" values="|Tries to read barcode(s) from provided textures|">
+   </PIN>
+   <PIN pinname="Output String" visible="0">
+   </PIN>
+   <PIN pinname="Show Grid" slicecount="1" values="0">
+   </PIN>
+   <PIN pinname="String Type" slicecount="1" values="MultiLine">
+   </PIN>
+   </NODE>
    </PATCH>
