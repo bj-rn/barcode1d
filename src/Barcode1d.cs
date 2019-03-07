@@ -44,31 +44,31 @@ namespace VVVV.Nodes
 
 
         [Input("Size", DefaultValues = new double[] { 64, 64 }, MinValue = 1, AsInt = true)]
-        public ISpread<Vector2D> FSizeIn;
+        protected ISpread<Vector2D> FSizeIn;
 
         [Input("Data", DefaultString = "00000000000000")]
-        public ISpread<string> FDataIn;
+        protected ISpread<string> FDataIn;
 
         [Input("Format", DefaultNodeValue = BarcodeFormat.UPC_A)]
-        public ISpread<BarcodeFormat> FFormatIn;
+        protected ISpread<BarcodeFormat> FFormatIn;
 
         [Input("ShowText", DefaultBoolean = false)]
-        public ISpread<bool> FShowTextIn;
+        protected ISpread<bool> FShowTextIn;
 
         [Input("Font", EnumName = "SystemFonts")]
-        IDiffSpread<EnumEntry> FFontIn;
+        protected IDiffSpread<EnumEntry> FFontIn;
 
         [Input("FontSize", DefaultValue = 32)]
-        public ISpread<int> FFontSizeIn;
+        protected ISpread<int> FFontSizeIn;
 
         [Output("Texture Out")]
-        public ISpread<TextureResource<Info>> FTextureOut;
+        protected ISpread<TextureResource<Info>> FTextureOut;
 
         [Output("Status")]
-        public ISpread<String> FStatusOut;
+        protected ISpread<String> FStatusOut;
 
         [Import]
-        public ILogger FLogger;
+        protected ILogger FLogger;
 
         public void OnImportsSatisfied()
         {

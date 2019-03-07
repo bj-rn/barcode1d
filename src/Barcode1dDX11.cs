@@ -31,34 +31,34 @@ namespace VVVV.DX11.Nodes
     {
 
         [Input("Size", DefaultValues = new double[] {64, 64}, MinValue = 1, AsInt = true)]
-        public IDiffSpread<Vector2D> FSizeIn;
+        protected IDiffSpread<Vector2D> FSizeIn;
 
         [Input("Data", DefaultString = "00000000000000")]
-        public IDiffSpread<string> FDataIn;
+        protected IDiffSpread<string> FDataIn;
 
         [Input("Format", DefaultNodeValue = BarcodeFormat.UPC_A)]
-        public IDiffSpread<BarcodeFormat> FFormatIn;
+        protected IDiffSpread<BarcodeFormat> FFormatIn;
 
         [Input("ShowText", DefaultBoolean = false)]
-        public IDiffSpread<bool> FShowTextIn;
+        protected IDiffSpread<bool> FShowTextIn;
 
         [Input("Font", EnumName = "SystemFonts")]
-        IDiffSpread<EnumEntry> FFontIn;
+        protected IDiffSpread<EnumEntry> FFontIn;
 
         [Input("FontSize", DefaultValue = 12)]
-        public IDiffSpread<int> FFontSizeIn;
+        protected IDiffSpread<int> FFontSizeIn;
 
         [Output("Texture Out")]
-        public ISpread<DX11Resource<DX11Texture2D>> FTextureOut;
+        protected ISpread<DX11Resource<DX11Texture2D>> FTextureOut;
 
         [Output("Status")]
-        public ISpread<String> FStatusOut;
+        protected ISpread<String> FStatusOut;
 
         [Import]
-        public ILogger FLogger;
+        protected ILogger FLogger;
 
         private EncodingOptions EncodingOptions { get; set; }
-        BitmapRenderer renderer;
+        protected BitmapRenderer renderer;
 
         public void Evaluate(int spreadMax)
         {
