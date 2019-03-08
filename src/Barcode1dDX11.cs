@@ -22,7 +22,7 @@ namespace VVVV.DX11.Nodes
     [PluginInfo(Name = "Barcode1d",
                 Category = "DX11.Texture",
                 Version = "",
-                Help = "Generates an DX11 texture containing the barcode for the provided data in the specified format.",
+                Help = "Generates a DX11 texture containing the barcode for the provided data in the specified format.",
                 Tags = "barcode, ZXing",
                 Author = "bj-rn",
                 Credits = "ravazquez, vux, ZXing.Net")]
